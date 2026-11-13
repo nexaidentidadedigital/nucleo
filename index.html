@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Andamento | Núcleo Dr Menegucci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #EFE8DB;
+    --cream-card: #FBF8F2;
+    --ink: #2B2B28;
+    --ink-soft: #6E6A61;
+    --orange: #E8632B;
+    --orange-soft: #F2A98A;
+    --green: #3E8E6B;
+    --line: #DCD3C2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Poppins', sans-serif;
+    color: var(--ink);
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+  }
+
+  /* Header */
+  .logo {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .logo-img {
+    height: 34px;
+    width: auto;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--orange);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.25;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--orange);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 0 20px;
+  }
+  .divider .l { width: 40px; height: 1px; background: var(--ink-soft); opacity: .5; }
+  .divider .d { width: 5px; height: 5px; background: var(--orange); transform: rotate(45deg); }
+
+  .quote {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+
+  .lede {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+  .lede b { color: var(--ink); }
+
+  /* Info cards */
+  .cards {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .card {
+    flex: 1;
+    min-width: 140px;
+    background: var(--cream-card);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(43,43,40,0.06);
+  }
+  .card .icon { font-size: 20px; margin-bottom: 8px; }
+  .card .label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  .card .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Section title */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  .section-hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+
+  /* Timeline */
+  .timeline { margin-bottom: 44px; }
+  .step {
+    background: var(--cream-card);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(43,43,40,0.06);
+    border: 1px solid transparent;
+  }
+  .step.current { border-color: var(--orange-soft); }
+  .step summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .step summary::-webkit-details-marker { display: none; }
+  .dot {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #fff;
+    background: #D6CDBB;
+  }
+  .step.done .dot { background: var(--green); }
+  .step.current .dot { background: var(--orange); }
+  .step-title { flex: 1; }
+  .step-date { font-size: 11px; font-weight: 400; color: var(--ink-soft); }
+  .chevron {
+    font-size: 12px;
+    color: var(--ink-soft);
+    transition: transform .2s ease;
+  }
+  .step[open] .chevron { transform: rotate(90deg); }
+  .step-body {
+    padding: 0 18px 18px 54px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+  .tag.done { background: rgba(62,142,107,0.12); color: var(--green); }
+  .tag.current { background: rgba(232,99,43,0.12); color: var(--orange); }
+  .tag.pending { background: rgba(110,106,97,0.10); color: var(--ink-soft); }
+
+  /* Next steps */
+  .next-list { margin-bottom: 40px; }
+  .next-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--cream-card);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(43,43,40,0.06);
+  }
+  .next-bullet {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .next-text { font-size: 13px; line-height: 1.6; flex: 1; }
+  .next-meta {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    text-align: center;
+  }
+  .footer-logo-img {
+    height: 26px;
+    width: auto;
+    margin-bottom: 10px;
+  }
+  .footer p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 6px auto 16px;
+    line-height: 1.6;
+  }
+  .disclaimer {
+    background: rgba(110,106,97,0.06);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    text-align: left;
+  }
+  .disclaimer b { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJDYW1hZGFfMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmlld0JveD0iMCAwIDE1MjEuMDkgMjgzLjgiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDp1cmwoI0dyYWRpZW50ZV9zZW1fbm9tZV8xMTIpO30uY2xzLTJ7ZmlsbDojMzdlMmFkO30uY2xzLTN7ZmlsbDojMWYzNzQxO30uY2xzLTR7ZmlsbDojZmU3ZjNjO308L3N0eWxlPjxsaW5lYXJHcmFkaWVudCBpZD0iR3JhZGllbnRlX3NlbV9ub21lXzExMiIgeDE9IjU0NC41MSIgeTE9IjE0MS4yNiIgeDI9IjgwNi40NiIgeTI9IjE0MS4yNiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE3OTY2YyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFmMzc0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIGlkPSJDYW1hZGFfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yMTkuOTMsMGgzNi42NnYyMjguODFjMCw3LjMtMS40MiwxNC4yNS0zLjk5LDIwLjY1LTUuODgsMTQuNTEtMTcuODIsMjUuOTctMzIuNjcsMzEuMjEtNS43MSwyLjAyLTExLjg1LDMuMTMtMTguMjksMy4xM3MtMTIuNTgtMS4xMi0xOC4zMy0zLjEzYy0xLjE3LS40MS0yLjMyLS44Ni0zLjQ2LTEuMzUtMTMuMjEtNS42OS0yMy4xMy0xNy4xLTI4LjIyLTMwLjU1TDc1LjgzLDQ4LjE1Yy0zLjA0LTguMDMtMTAuNzEtMTMuMzctMTkuMjktMTMuNDItMTkuODgsMC0xOS44MiwxNy40My0xOS44OCwzMC45NXYyMTguMTJIMFY1Ni42MmMwLTcuOTQsMS42OC0xNS41LDQuNzItMjIuMjgsNi4xLTEzLjc4LDE3LjY0LTI0LjU2LDMxLjk0LTI5LjU4LDUuNzUtMi4wMiwxMS44OS0zLjEzLDE4LjMzLTMuMTNzMTIuNTgsMS4xMiwxOC4zMywzLjEzYzE0LjI1LDUuMDIsMjUuODQsMTUuOCwzMS45NCwyOS41OCwxLjQsMy4wNyw1OC4zNiwxNzEuODksODEuODYsMjA4LjM3Ljg4LDEuNjcsMS45NywzLjIxLDMuMzIsNC41LDEuMDUsMS4xNywyLDEuOTQsMi44MiwyLjI1LjE0LjA1LjIyLjA4LjM1LjEzLDIuNjEsMS41Niw1LjYyLDIuNTEsOC44OCwyLjUxLDguOSwwLDE2LjE2LTYuNywxNy4yMi0xNS4zMi4wNC0uMjkuMDYtLjU5LjA5LS44OS4wMy0uNDEuMTItLjguMTItMS4yMiwwLS4wNy0uMDItLjE0LS4wMi0uMjIsMC0uMS4wMi0uMi4wMi0uMzFWMFpNMTA2My45NiwxMDcuNTRjLS42LTI4LjMzLTExLjkzLTU0LjA1LTMwLjA5LTczLjE5LTIuMTEtMi4yMy00LjI1LTQuMzQtNi41My02LjM1LTEwLjU2LTkuNDQtMjMuMDEtMTYuOTEtMzYuNjYtMjEuNjgtMTEuNDYtNC4xMi0yMy44Mi02LjMxLTM2LjY2LTYuMzFzLTI1LjIsMi4xOS0zNi42Niw2LjMxYy0xMy42NSw0Ljc3LTI2LjEsMTIuMjMtMzYuNjYsMjEuNjgtMi4yNywyLjAyLTQuNDIsNC4xMi02LjUzLDYuMzUtMTguMTYsMTkuMTUtMjkuNDksNDQuODYtMzAuMDksNzMuMTktLjA0LjgyLS4wNCwxLjU5LS4wNCwyLjR2MTczLjg2aDM2LjY2di0xMjQuNzVoMTA5Ljk4di0zNC4zNGgtMTA5Ljk4di0xNy4xN2MwLTI3LjEzLDE0Ljc3LTUwLjgzLDM2LjY2LTYzLjQ5LDkuNjItNS41OCwyMC42NS05LjAyLDMyLjM3LTkuNywxLjQyLS4wOSwyLjgzLS4xMyw0LjI5LS4xM3MyLjg4LjA0LDQuMjkuMTNjMTEuNzIuNjksMjIuNzUsNC4xMiwzMi4zNyw5LjcsMjEuODksMTIuNjYsMzYuNjYsMzYuMzYsMzYuNjYsNjMuNDl2MTc2LjI3aDM2LjY2VjEwOS45NGMwLS44MiwwLTEuNTktLjA0LTIuNFpNMzQ4LjI0LDBjLTYuNDQsMC0xMi41OCwxLjEyLTE4LjMzLDMuMTMtMTQuODUsNS4yNC0yNi43OSwxNi43LTMyLjYzLDMxLjIxLTIuNjIsNi4zNS00LjAzLDEzLjMxLTQuMDMsMjAuNjF2MTczLjg2YzAsNy4zLDEuNDIsMTQuMjUsNC4wMywyMC42NSw1Ljg0LDE0LjUxLDE3Ljc3LDI1LjkzLDMyLjYzLDMxLjIxLDUuNzUsMi4wMiwxMS44OSwzLjEzLDE4LjMzLDMuMTNoMTY3LjI1di0zNC4zNGgtMTQ4Ljkycy04LjItLjA0LTE4LjMzLS4wNC0xOC4zMy04LjItMTguMzMtMTguMzN2LTcyLjA0aDEwOS45OHYtMzQuMzNoLTEwOS45OFY1Mi42N2MwLTEwLjEzLDguMi0xOC4zMywxOC4zMy0xOC4zM2gxNjcuMjVWMGgtMTY3LjI1WiIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTc1Mi4zOCwxMzAuNjljLTYuNzctMi45MS0xMy44Ni00LjIzLTIxLjE4LTQuMjMtNjcuMzYsMC0xNjkuOTIsMTQxLjczLTE4MC40MiwxNTUuNzhsNDAuNTMuMTRjMzkuMDEtNTIuMTUsMTA3Ljg0LTEzNy43MiwxNDYuMTctMTIxLjIyLDI0LjU3LDEwLjU3LDM3LjgzLDQ4LjE5LDM5LjIyLDg4LjZsMjkuNzUuMjhjLTIuNTUtNzQuMjYtMjIuMTktMTA1LjY0LTU0LjA4LTExOS4zNloiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNTkxLjMxIDI4Mi4zOSA1NDQuNTEgMjgyLjM5IDc2NS45NCAuMTQgODA2LjQ2IC4yOCA1OTEuMzEgMjgyLjM5Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjE5Ljc2LDEyMS4zNmMtMjQuNTctMTAuNTctMzcuODMtNDYuNi0zOS4yMi04Ny4wMWgtMjkuNzVjMi41NSw3NC4yNiwyMi4xOSwxMDMuNzgsNTQuMDgsMTE3LjQ5LDYuNzcsMi45MSwxMy44Niw0LjIzLDIxLjE4LDQuMjMsNjcuMzYsMCwxNjkuOTItMTQxLjczLDE4MC40Mi0xNTUuNzhsLTQwLjUzLS4xNGMtMzkuMDEsNTIuMTUtMTA3Ljg0LDEzNy43Mi0xNDYuMTcsMTIxLjIyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTExNDUuMDgsODEuMXY0My41N2gtNi42NHYtNDMuNTdoNi42NFoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMTcyLjkxLDEyNC42N2gtMTQuNzZ2LTQzLjU3aDE1LjA5YzEzLjk4LDAsMjMuMzQsOC42NSwyMy4zNCwyMS41OSwwLDEzLjY2LTEwLjIxLDIxLjk4LTIzLjY3LDIxLjk4Wk0xMTczLjI0LDg3LjIxaC04LjQ1djMxLjQxaDguMTNjOS41LDAsMTYuODUtNS45OCwxNi44NS0xNS45MywwLTkuMjMtNi43Ny0xNS40OC0xNi41Mi0xNS40OFoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMjExLjkzLDEyNC42N2MtNC40OSwwLTYuMTEtMi4yOC02LjExLTUuOTh2LTMxLjYxYzAtMy43MSwxLjYyLTUuOTgsNi4xMS01Ljk4aDIzLjkzdjYuMDVoLTIzLjQxdjEyLjY4aDIyLjExdjYuMDVoLTIyLjExdjEyLjc0aDIzLjg2djYuMDVoLTI0LjM5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEyNDUuOTQsMTI0LjY3di0zOC4xMWMwLTMuOTcsMi42LTYuMjQsNS45Mi02LjI0LDIuNjcsMCw0LjQ5LDEuMDQsNS43MiwzLjMybDE4LjM0LDM0LjI3Yy4xOS41OC4zMi44NC43MS44NC4yNiwwLC4zMy0uMTMuMzMtLjUydi0zNy4xNGg2LjMxdjM4LjE3YzAsMy45Ny0yLjgsNi4xOC01Ljc5LDYuMTgtMi40NywwLTQuNjItMS4wNC01Ljg2LTMuMzhsLTE4LjI3LTM0LjM0Yy0uMTMtLjUyLS4yNi0uNzgtLjU4LS43OC0uMzksMC0uNTIuMjYtLjUyLjc4djM2Ljk0aC02LjMxWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzMjMuNTksODcuMjFoLTEzLjR2MzcuNDZoLTYuNjN2LTM3LjQ2aC0xMy4zM3YtNi4xMWgzMy4zNnY2LjExWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzMzcuNyw4MS4xdjQzLjU3aC02LjYzdi00My41N2g2LjYzWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzNjUuNTQsMTI0LjY3aC0xNC43NnYtNDMuNTdoMTUuMDljMTMuOTgsMCwyMy4zNSw4LjY1LDIzLjM1LDIxLjU5LDAsMTMuNjYtMTAuMjEsMjEuOTgtMjMuNjcsMjEuOThaTTEzNjUuODYsODcuMjFoLTguNDV2MzEuNDFoOC4xM2M5LjUsMCwxNi44NC01Ljk4LDE2Ljg0LTE1LjkzLDAtOS4yMy02Ljc2LTE1LjQ4LTE2LjUyLTE1LjQ4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE0MDUuNzksODYuMzZjMS4zLTQuMSw0LjQ5LTYuMDUsOC4xMy02LjA1czYuODksMS45NSw4LjE5LDYuMDVsMTEuOSwzOC4zaC02Ljc2bC0zLjE5LTEwLjY2LTIwLjI5LjA3LTMuMTksMTAuNmgtNi43bDExLjktMzguM1pNMTQwNS41OSwxMDguMDJoMTYuNzJsLTUuODYtMTkuN2MtLjQ1LTEuMzctMS4yMy0yLjAyLTIuNDctMi4wMi0xLjMsMC0yLjA4LjY1LTIuNDcsMi4wMmwtNS45MiwxOS43WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE0NTcuNjgsMTI0LjY3aC0xNC43NnYtNDMuNTdoMTUuMDljMTMuOTgsMCwyMy4zNCw4LjY1LDIzLjM0LDIxLjU5LDAsMTMuNjYtMTAuMjEsMjEuOTgtMjMuNjcsMjEuOThaTTE0NTguMDEsODcuMjFoLTguNDV2MzEuNDFoOC4xM2M5LjUsMCwxNi44NS01Ljk4LDE2Ljg1LTE1LjkzLDAtOS4yMy02Ljc3LTE1LjQ4LTE2LjUyLTE1LjQ4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE0OTYuNywxMjQuNjdjLTQuNDksMC02LjExLTIuMjgtNi4xMS01Ljk4di0zMS42MWMwLTMuNzEsMS42Mi01Ljk4LDYuMTEtNS45OGgyMy45M3Y2LjA1aC0yMy40MXYxMi42OGgyMi4xMXY2LjA1aC0yMi4xMXYxMi43NGgyMy44NnY2LjA1aC0yNC4zOVoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMTUzLjIxLDIwMi43MWgtMTQuNzZ2LTQzLjU3aDE1LjA5YzEzLjk4LDAsMjMuMzQsOC42NSwyMy4zNCwyMS41OSwwLDEzLjY2LTEwLjIxLDIxLjk4LTIzLjY3LDIxLjk4Wk0xMTUzLjU0LDE2NS4yNWgtOC40NXYzMS40MWg4LjEzYzkuNSwwLDE2Ljg1LTUuOTgsMTYuODUtMTUuOTMsMC05LjIzLTYuNzctMTUuNDgtMTYuNTItMTUuNDhaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTE5My40LDE1OS4xM3Y0My41N2gtNi42NHYtNDMuNTdoNi42NFoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMjAyLjUsMTgwLjg1YzAtMTIuMjksOS42My0yMi40NCwyMi4xOC0yMi40NCw3LjIyLDAsMTQuMjQsMy41MSwxNy42MywxMC4xNGwtNS40LDMuMTJjLTIuNi00LjQ5LTcuMTUtNy4wMi0xMi40OS03LjAyLTguNTgsMC0xNS4wOSw3LjIyLTE1LjA5LDE2LjMyczYuNSwxNi4zOSwxNS4zNSwxNi4zOWM1LjIsMCw5LjQzLTIuMDIsMTEuNTEtNC40OXYtMTAuNDdoNi40NHYxMi43NWMtMi45OSw0LjM2LTkuNDMsOC4zMi0xNy45NSw4LjMyLTEyLjQ4LDAtMjIuMTgtMTAuMDgtMjIuMTgtMjIuNjNaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTI1OS4yOCwxNTkuMTN2NDMuNTdoLTYuNjR2LTQzLjU3aDYuNjRaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTMwMC4wNSwxNjUuMjVoLTEzLjR2MzcuNDZoLTYuNjN2LTM3LjQ2aC0xMy4zM3YtNi4xMWgzMy4zNnY2LjExWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzMTIuMjcsMTY0LjRjMS4zLTQuMSw0LjQ5LTYuMDUsOC4xMy02LjA1czYuODksMS45NSw4LjE5LDYuMDVsMTEuOSwzOC4zaC02Ljc3bC0zLjE5LTEwLjY2LTIwLjI5LjA3LTMuMTksMTAuNmgtNi43bDExLjktMzguM1pNMTMxMi4wOCwxODYuMDZoMTYuNzFsLTUuODUtMTkuN2MtLjQ2LTEuMzctMS4yNC0yLjAyLTIuNDctMi4wMi0xLjMsMC0yLjA4LjY1LTIuNDcsMi4wMmwtNS45MiwxOS43WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzNTYuMDQsMTk2LjU5aDIxLjY2djYuMTFoLTIyLjE4Yy00LjQyLDAtNi4xMi0yLjI4LTYuMTItNS45OHYtMzcuNTloNi42NHYzNy40NloiLz48L2c+PC9zdmc+" alt="Nexa Identidade Digital" class="logo-img">
+  </div>
+  <div class="eyebrow">RELATÓRIO DE ANDAMENTO</div>
+  <h1>O andamento do registro<br>das suas <em>marcas</em></h1>
+  <div class="divider"><div class="l"></div><div class="d"></div><div class="l"></div></div>
+  <p class="quote">"Quem registra primeiro, protege para sempre."</p>
+  <p class="lede">Olá. Este é o relatório de acompanhamento dos pedidos de registro das marcas <b>Núcleo Dr Menegucci</b>, <b>Mene Hair</b> e <b>Mene Run</b> junto ao INPI. Clique em cada etapa abaixo para ver os detalhes.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">📄</div>
+      <div class="label">Processos</div>
+      <div class="value">9 a protocolar</div>
+    </div>
+    <div class="card">
+      <div class="icon">🏷️</div>
+      <div class="label">Classes NCL</div>
+      <div class="value">03, 05, 09, 35, 41 e 44</div>
+    </div>
+    <div class="card">
+      <div class="icon">⏳</div>
+      <div class="label">Status atual</div>
+      <div class="value">Guias e autorização</div>
+    </div>
+  </div>
+  <div class="section-title">Linha do tempo do processo</div>
+  <div class="section-hint">Toque em cada etapa para expandir</div>
+  <div class="timeline">
+    <details class="step done">
+      <summary>
+        <div class="dot">✓</div>
+        <div class="step-title">Busca de anterioridade<div class="step-date">27/10/2026 e 13/11/2026</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        Levantamento na base do INPI das marcas já registradas ou em pedido com os elementos MENEGUCCI, MENE, MENE HAIR e MENE RUN nas classes pretendidas. O resultado consta nos Anexos I e I-A e orienta a estratégia de depósito.
+        <div class="tag done">Concluído</div>
+      </div>
+    </details>
+    <details class="step done">
+      <summary>
+        <div class="dot">✓</div>
+        <div class="step-title">Contratação e aditivo<div class="step-date">Concluído</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        Assinatura do contrato e do aditivo que substituiu a marca Mene Class pela Mene Hair, com a definição das marcas, das classes e das condições do serviço.
+        <div class="tag done">Concluído</div>
+      </div>
+    </details>
+    <details class="step current" open>
+      <summary>
+        <div class="dot">●</div>
+        <div class="step-title">Guias do INPI e autorização de uso do nome<div class="step-date">Em andamento</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        Pagamento das 9 guias de depósito emitidas pela Nexa e assinatura, pelo Dr. Luís Guilherme, da declaração que autoriza o uso do seu nome civil nas marcas. A declaração é anexada a cada pedido e é exigida pelo INPI por se tratar de sobrenome.
+        <div class="tag current">Em andamento</div>
+      </div>
+    </details>
+    <details class="step ">
+      <summary>
+        <div class="dot">4</div>
+        <div class="step-title">Depósito dos pedidos<div class="step-date">Até 3 dias úteis após as guias e a declaração</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        Protocolo de 9 pedidos de registro no INPI: Núcleo Dr Menegucci nas classes 44 (serviços médicos) e 35 (publicidade e comercialização); Mene Hair nas classes 44 (protocolo capilar), 03 (cosméticos capilares), 05 (preparações dermatológicas) e 35; e Mene Run nas classes 41 (consultoria de corrida), 09 (aplicativo) e 35. A data do depósito é a que garante a prioridade das marcas.
+        <div class="tag pending">Pendente</div>
+      </div>
+    </details>
+    <details class="step ">
+      <summary>
+        <div class="dot">5</div>
+        <div class="step-title">Publicação para oposição<div class="step-date">Cerca de 30 a 60 dias após o depósito</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        O INPI publica os pedidos na Revista da Propriedade Industrial. A partir daí, terceiros têm 60 dias para apresentar oposição. Se houver oposição, a Nexa apresenta a manifestação de defesa, já incluída no plano (uma por classe).
+        <div class="tag pending">Pendente</div>
+      </div>
+    </details>
+    <details class="step ">
+      <summary>
+        <div class="dot">6</div>
+        <div class="step-title">Exame de mérito<div class="step-date">A iniciar após o prazo de oposição</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        O INPI analisa os pedidos quanto à colidência com marcas já registradas e à conformidade com a Lei da Propriedade Industrial. Se houver exigência, a Nexa responde dentro do prazo.
+        <div class="tag pending">Pendente</div>
+      </div>
+    </details>
+    <details class="step ">
+      <summary>
+        <div class="dot">7</div>
+        <div class="step-title">Decisão do INPI<div class="step-date">A definir</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        O INPI publica na RPI o deferimento ou indeferimento de cada pedido. Em caso de indeferimento, a Nexa orienta sobre o recurso administrativo, contratado à parte.
+        <div class="tag pending">Pendente</div>
+      </div>
+    </details>
+    <details class="step ">
+      <summary>
+        <div class="dot">8</div>
+        <div class="step-title">Certificado de registro<div class="step-date">A definir</div></div>
+        <div class="chevron">▸</div>
+      </summary>
+      <div class="step-body">
+        Após o deferimento, o INPI emite o certificado de registro de cada marca, com validade de 10 anos, renovável por períodos iguais e sucessivos.
+        <div class="tag pending">Pendente</div>
+      </div>
+    </details>
+  </div>
+  <div class="section-title">Próximos passos</div>
+  <div class="section-hint">O que acontece daqui para frente</div>
+  <div class="next-list">
+    <div class="next-item">
+      <div class="next-bullet"></div>
+      <div class="next-text">Pagar as 9 guias do INPI (R$ 440,00 por classe, total de R$ 3.960,00).
+        <div class="next-meta">Responsável: Núcleo · Previsão: assim que receber as guias</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-bullet"></div>
+      <div class="next-text">Assinar a declaração de autorização de uso do nome civil, pelo gov.br ou com firma reconhecida.
+        <div class="next-meta">Responsável: Dr. Luís Guilherme · Previsão: junto com o pagamento das guias</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-bullet"></div>
+      <div class="next-text">Protocolar os 9 pedidos e enviar os números de processo e os comprovantes.
+        <div class="next-meta">Responsável: Nexa · Previsão: até 3 dias úteis após as guias pagas e a declaração assinada</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJDYW1hZGFfMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmlld0JveD0iMCAwIDE1MjEuMDkgMjgzLjgiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDp1cmwoI0dyYWRpZW50ZV9zZW1fbm9tZV8xMTIpO30uY2xzLTJ7ZmlsbDojMzdlMmFkO30uY2xzLTN7ZmlsbDojMWYzNzQxO30uY2xzLTR7ZmlsbDojZmU3ZjNjO308L3N0eWxlPjxsaW5lYXJHcmFkaWVudCBpZD0iR3JhZGllbnRlX3NlbV9ub21lXzExMiIgeDE9IjU0NC41MSIgeTE9IjE0MS4yNiIgeDI9IjgwNi40NiIgeTI9IjE0MS4yNiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE3OTY2YyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFmMzc0MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIGlkPSJDYW1hZGFfMS0yIj48cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yMTkuOTMsMGgzNi42NnYyMjguODFjMCw3LjMtMS40MiwxNC4yNS0zLjk5LDIwLjY1LTUuODgsMTQuNTEtMTcuODIsMjUuOTctMzIuNjcsMzEuMjEtNS43MSwyLjAyLTExLjg1LDMuMTMtMTguMjksMy4xM3MtMTIuNTgtMS4xMi0xOC4zMy0zLjEzYy0xLjE3LS40MS0yLjMyLS44Ni0zLjQ2LTEuMzUtMTMuMjEtNS42OS0yMy4xMy0xNy4xLTI4LjIyLTMwLjU1TDc1LjgzLDQ4LjE1Yy0zLjA0LTguMDMtMTAuNzEtMTMuMzctMTkuMjktMTMuNDItMTkuODgsMC0xOS44MiwxNy40My0xOS44OCwzMC45NXYyMTguMTJIMFY1Ni42MmMwLTcuOTQsMS42OC0xNS41LDQuNzItMjIuMjgsNi4xLTEzLjc4LDE3LjY0LTI0LjU2LDMxLjk0LTI5LjU4LDUuNzUtMi4wMiwxMS44OS0zLjEzLDE4LjMzLTMuMTNzMTIuNTgsMS4xMiwxOC4zMywzLjEzYzE0LjI1LDUuMDIsMjUuODQsMTUuOCwzMS45NCwyOS41OCwxLjQsMy4wNyw1OC4zNiwxNzEuODksODEuODYsMjA4LjM3Ljg4LDEuNjcsMS45NywzLjIxLDMuMzIsNC41LDEuMDUsMS4xNywyLDEuOTQsMi44MiwyLjI1LjE0LjA1LjIyLjA4LjM1LjEzLDIuNjEsMS41Niw1LjYyLDIuNTEsOC44OCwyLjUxLDguOSwwLDE2LjE2LTYuNywxNy4yMi0xNS4zMi4wNC0uMjkuMDYtLjU5LjA5LS44OS4wMy0uNDEuMTItLjguMTItMS4yMiwwLS4wNy0uMDItLjE0LS4wMi0uMjIsMC0uMS4wMi0uMi4wMi0uMzFWMFpNMTA2My45NiwxMDcuNTRjLS42LTI4LjMzLTExLjkzLTU0LjA1LTMwLjA5LTczLjE5LTIuMTEtMi4yMy00LjI1LTQuMzQtNi41My02LjM1LTEwLjU2LTkuNDQtMjMuMDEtMTYuOTEtMzYuNjYtMjEuNjgtMTEuNDYtNC4xMi0yMy44Mi02LjMxLTM2LjY2LTYuMzFzLTI1LjIsMi4xOS0zNi42Niw2LjMxYy0xMy42NSw0Ljc3LTI2LjEsMTIuMjMtMzYuNjYsMjEuNjgtMi4yNywyLjAyLTQuNDIsNC4xMi02LjUzLDYuMzUtMTguMTYsMTkuMTUtMjkuNDksNDQuODYtMzAuMDksNzMuMTktLjA0LjgyLS4wNCwxLjU5LS4wNCwyLjR2MTczLjg2aDM2LjY2di0xMjQuNzVoMTA5Ljk4di0zNC4zNGgtMTA5Ljk4di0xNy4xN2MwLTI3LjEzLDE0Ljc3LTUwLjgzLDM2LjY2LTYzLjQ5LDkuNjItNS41OCwyMC42NS05LjAyLDMyLjM3LTkuNywxLjQyLS4wOSwyLjgzLS4xMyw0LjI5LS4xM3MyLjg4LjA0LDQuMjkuMTNjMTEuNzIuNjksMjIuNzUsNC4xMiwzMi4zNyw5LjcsMjEuODksMTIuNjYsMzYuNjYsMzYuMzYsMzYuNjYsNjMuNDl2MTc2LjI3aDM2LjY2VjEwOS45NGMwLS44MiwwLTEuNTktLjA0LTIuNFpNMzQ4LjI0LDBjLTYuNDQsMC0xMi41OCwxLjEyLTE4LjMzLDMuMTMtMTQuODUsNS4yNC0yNi43OSwxNi43LTMyLjYzLDMxLjIxLTIuNjIsNi4zNS00LjAzLDEzLjMxLTQuMDMsMjAuNjF2MTczLjg2YzAsNy4zLDEuNDIsMTQuMjUsNC4wMywyMC42NSw1Ljg0LDE0LjUxLDE3Ljc3LDI1LjkzLDMyLjYzLDMxLjIxLDUuNzUsMi4wMiwxMS44OSwzLjEzLDE4LjMzLDMuMTNoMTY3LjI1di0zNC4zNGgtMTQ4Ljkycy04LjItLjA0LTE4LjMzLS4wNC0xOC4zMy04LjItMTguMzMtMTguMzN2LTcyLjA0aDEwOS45OHYtMzQuMzNoLTEwOS45OFY1Mi42N2MwLTEwLjEzLDguMi0xOC4zMywxOC4zMy0xOC4zM2gxNjcuMjVWMGgtMTY3LjI1WiIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTc1Mi4zOCwxMzAuNjljLTYuNzctMi45MS0xMy44Ni00LjIzLTIxLjE4LTQuMjMtNjcuMzYsMC0xNjkuOTIsMTQxLjczLTE4MC40MiwxNTUuNzhsNDAuNTMuMTRjMzkuMDEtNTIuMTUsMTA3Ljg0LTEzNy43MiwxNDYuMTctMTIxLjIyLDI0LjU3LDEwLjU3LDM3LjgzLDQ4LjE5LDM5LjIyLDg4LjZsMjkuNzUuMjhjLTIuNTUtNzQuMjYtMjIuMTktMTA1LjY0LTU0LjA4LTExOS4zNloiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iNTkxLjMxIDI4Mi4zOSA1NDQuNTEgMjgyLjM5IDc2NS45NCAuMTQgODA2LjQ2IC4yOCA1OTEuMzEgMjgyLjM5Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNjE5Ljc2LDEyMS4zNmMtMjQuNTctMTAuNTctMzcuODMtNDYuNi0zOS4yMi04Ny4wMWgtMjkuNzVjMi41NSw3NC4yNiwyMi4xOSwxMDMuNzgsNTQuMDgsMTE3LjQ5LDYuNzcsMi45MSwxMy44Niw0LjIzLDIxLjE4LDQuMjMsNjcuMzYsMCwxNjkuOTItMTQxLjczLDE4MC40Mi0xNTUuNzhsLTQwLjUzLS4xNGMtMzkuMDEsNTIuMTUtMTA3Ljg0LDEzNy43Mi0xNDYuMTcsMTIxLjIyWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTExNDUuMDgsODEuMXY0My41N2gtNi42NHYtNDMuNTdoNi42NFoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMTcyLjkxLDEyNC42N2gtMTQuNzZ2LTQzLjU3aDE1LjA5YzEzLjk4LDAsMjMuMzQsOC42NSwyMy4zNCwyMS41OSwwLDEzLjY2LTEwLjIxLDIxLjk4LTIzLjY3LDIxLjk4Wk0xMTczLjI0LDg3LjIxaC04LjQ1djMxLjQxaDguMTNjOS41LDAsMTYuODUtNS45OCwxNi44NS0xNS45MywwLTkuMjMtNi43Ny0xNS40OC0xNi41Mi0xNS40OFoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMjExLjkzLDEyNC42N2MtNC40OSwwLTYuMTEtMi4yOC02LjExLTUuOTh2LTMxLjYxYzAtMy43MSwxLjYyLTUuOTgsNi4xMS01Ljk4aDIzLjkzdjYuMDVoLTIzLjQxdjEyLjY4aDIyLjExdjYuMDVoLTIyLjExdjEyLjc0aDIzLjg2djYuMDVoLTI0LjM5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEyNDUuOTQsMTI0LjY3di0zOC4xMWMwLTMuOTcsMi42LTYuMjQsNS45Mi02LjI0LDIuNjcsMCw0LjQ5LDEuMDQsNS43MiwzLjMybDE4LjM0LDM0LjI3Yy4xOS41OC4zMi44NC43MS44NC4yNiwwLC4zMy0uMTMuMzMtLjUydi0zNy4xNGg2LjMxdjM4LjE3YzAsMy45Ny0yLjgsNi4xOC01Ljc5LDYuMTgtMi40NywwLTQuNjItMS4wNC01Ljg2LTMuMzhsLTE4LjI3LTM0LjM0Yy0uMTMtLjUyLS4yNi0uNzgtLjU4LS43OC0uMzksMC0uNTIuMjYtLjUyLjc4djM2Ljk0aC02LjMxWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzMjMuNTksODcuMjFoLTEzLjR2MzcuNDZoLTYuNjN2LTM3LjQ2aC0xMy4zM3YtNi4xMWgzMy4zNnY2LjExWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzMzcuNyw4MS4xdjQzLjU3aC02LjYzdi00My41N2g2LjYzWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzNjUuNTQsMTI0LjY3aC0xNC43NnYtNDMuNTdoMTUuMDljMTMuOTgsMCwyMy4zNSw4LjY1LDIzLjM1LDIxLjU5LDAsMTMuNjYtMTAuMjEsMjEuOTgtMjMuNjcsMjEuOThaTTEzNjUuODYsODcuMjFoLTguNDV2MzEuNDFoOC4xM2M5LjUsMCwxNi44NC01Ljk4LDE2Ljg0LTE1LjkzLDAtOS4yMy02Ljc2LTE1LjQ4LTE2LjUyLTE1LjQ4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE0MDUuNzksODYuMzZjMS4zLTQuMSw0LjQ5LTYuMDUsOC4xMy02LjA1czYuODksMS45NSw4LjE5LDYuMDVsMTEuOSwzOC4zaC02Ljc2bC0zLjE5LTEwLjY2LTIwLjI5LjA3LTMuMTksMTAuNmgtNi43bDExLjktMzguM1pNMTQwNS41OSwxMDguMDJoMTYuNzJsLTUuODYtMTkuN2MtLjQ1LTEuMzctMS4yMy0yLjAyLTIuNDctMi4wMi0xLjMsMC0yLjA4LjY1LTIuNDcsMi4wMmwtNS45MiwxOS43WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE0NTcuNjgsMTI0LjY3aC0xNC43NnYtNDMuNTdoMTUuMDljMTMuOTgsMCwyMy4zNCw4LjY1LDIzLjM0LDIxLjU5LDAsMTMuNjYtMTAuMjEsMjEuOTgtMjMuNjcsMjEuOThaTTE0NTguMDEsODcuMjFoLTguNDV2MzEuNDFoOC4xM2M5LjUsMCwxNi44NS01Ljk4LDE2Ljg1LTE1LjkzLDAtOS4yMy02Ljc3LTE1LjQ4LTE2LjUyLTE1LjQ4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE0OTYuNywxMjQuNjdjLTQuNDksMC02LjExLTIuMjgtNi4xMS01Ljk4di0zMS42MWMwLTMuNzEsMS42Mi01Ljk4LDYuMTEtNS45OGgyMy45M3Y2LjA1aC0yMy40MXYxMi42OGgyMi4xMXY2LjA1aC0yMi4xMXYxMi43NGgyMy44NnY2LjA1aC0yNC4zOVoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMTUzLjIxLDIwMi43MWgtMTQuNzZ2LTQzLjU3aDE1LjA5YzEzLjk4LDAsMjMuMzQsOC42NSwyMy4zNCwyMS41OSwwLDEzLjY2LTEwLjIxLDIxLjk4LTIzLjY3LDIxLjk4Wk0xMTUzLjU0LDE2NS4yNWgtOC40NXYzMS40MWg4LjEzYzkuNSwwLDE2Ljg1LTUuOTgsMTYuODUtMTUuOTMsMC05LjIzLTYuNzctMTUuNDgtMTYuNTItMTUuNDhaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTE5My40LDE1OS4xM3Y0My41N2gtNi42NHYtNDMuNTdoNi42NFoiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMjAyLjUsMTgwLjg1YzAtMTIuMjksOS42My0yMi40NCwyMi4xOC0yMi40NCw3LjIyLDAsMTQuMjQsMy41MSwxNy42MywxMC4xNGwtNS40LDMuMTJjLTIuNi00LjQ5LTcuMTUtNy4wMi0xMi40OS03LjAyLTguNTgsMC0xNS4wOSw3LjIyLTE1LjA5LDE2LjMyczYuNSwxNi4zOSwxNS4zNSwxNi4zOWM1LjIsMCw5LjQzLTIuMDIsMTEuNTEtNC40OXYtMTAuNDdoNi40NHYxMi43NWMtMi45OSw0LjM2LTkuNDMsOC4zMi0xNy45NSw4LjMyLTEyLjQ4LDAtMjIuMTgtMTAuMDgtMjIuMTgtMjIuNjNaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTI1OS4yOCwxNTkuMTN2NDMuNTdoLTYuNjR2LTQzLjU3aDYuNjRaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTMwMC4wNSwxNjUuMjVoLTEzLjR2MzcuNDZoLTYuNjN2LTM3LjQ2aC0xMy4zM3YtNi4xMWgzMy4zNnY2LjExWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzMTIuMjcsMTY0LjRjMS4zLTQuMSw0LjQ5LTYuMDUsOC4xMy02LjA1czYuODksMS45NSw4LjE5LDYuMDVsMTEuOSwzOC4zaC02Ljc3bC0zLjE5LTEwLjY2LTIwLjI5LjA3LTMuMTksMTAuNmgtNi43bDExLjktMzguM1pNMTMxMi4wOCwxODYuMDZoMTYuNzFsLTUuODUtMTkuN2MtLjQ2LTEuMzctMS4yNC0yLjAyLTIuNDctMi4wMi0xLjMsMC0yLjA4LjY1LTIuNDcsMi4wMmwtNS45MiwxOS43WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTEzNTYuMDQsMTk2LjU5aDIxLjY2djYuMTFoLTIyLjE4Yy00LjQyLDAtNi4xMi0yLjI4LTYuMTItNS45OHYtMzcuNTloNi42NHYzNy40NloiLz48L2c+PC9zdmc+" alt="Nexa Identidade Digital" class="footer-logo-img">
+    <p>Este relatório foi elaborado pela Nexa Identidade Digital para acompanhamento do processo de registro de marca junto ao INPI.</p>
+    <div class="disclaimer">
+      <b>Aviso importante:</b> os prazos indicados são estimativas com base nos trâmites usuais do INPI e podem sofrer alteração conforme o andamento da fila de exame do órgão. O deferimento do registro é ato de competência exclusiva do INPI.
+    </div>
+  </div>
+</div>
+</body>
+</html>
